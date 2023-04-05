@@ -2,17 +2,35 @@
   "2.7": {
     "sha256": "f22f662da504d49ce2080e446e4bea7008cee11d5ec4858fc69000d0e5b1d7fb",
     "variants": [
+      "slim-bookworm",
+      "bookworm",
       "bullseye",
       "slim-bullseye",
       "buster",
       "slim-buster",
       "alpine3.16"
     ],
-    "version": "2.7.8"
+    "version": "2.7.8",
+    "openssl": {
+      "versions": [ "slim-bookworm", "bookworm" ],
+      "ssl": {
+        "lib"   : "libssl1.1",
+        "name"  : "libssl1.1_1.1.1n-0+deb11u4_amd64.deb",
+        "url"   : "http://ftp.debian.org/debian/pool/main/o/openssl/libssl1.1_1.1.1n-0+deb11u4_amd64.deb",
+        "sha256": "62faed6afef01c09524a5f082bd63f1732c5f986856be11a3e7401128c5c01c9"
+      },
+      "dev" : {
+        "name"  : "libssl-dev_1.1.1n-0+deb11u4_amd64.deb",
+        "url"   : "http://ftp.debian.org/debian/pool/main/o/openssl/libssl-dev_1.1.1n-0+deb11u4_amd64.deb",
+        "sha256": "58b94df14743d35ac280d35cdc29d90548e55ab6e9b7399d070ab7f2e4f6f11f"
+      }
+    }
   },
   "3.0": {
     "sha256": "b5cbee93e62d85cfb2a408c49fa30a74231ae8409c2b3858e5f5ea254d7ddbd1",
     "variants": [
+      "slim-bookworm",
+      "bookworm",
       "bullseye",
       "slim-bullseye",
       "buster",
@@ -24,6 +42,8 @@
   "3.1": {
     "sha256": "1b6d6010e76036c937b9671f4752f065aeca800a6c664f71f6c9a699453af94f",
     "variants": [
+      "slim-bookworm",
+      "bookworm",
       "bullseye",
       "slim-bullseye",
       "buster",
@@ -68,6 +88,8 @@
     },
     "sha256": "4b352d0f7ec384e332e3e44cdbfdcd5ff2d594af3c8296b5636c710975149e23",
     "variants": [
+      "slim-bookworm",
+      "bookworm",
       "bullseye",
       "slim-bullseye",
       "buster",

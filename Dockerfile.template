@@ -4,6 +4,9 @@
 	;
 	def is_slim:
 		env.variant | startswith("slim-")
+	;
+	def need_openssl:
+		.openssl.versions | index(env.variant)
 -}}
 {{ if is_alpine then ( -}}
 FROM alpine:{{ env.variant | ltrimstr("alpine") }}
@@ -116,6 +119,20 @@ RUN set -eux; \
 	; \
 	rm -rf /var/lib/apt/lists/*; \
 {{ ) end -}}
+{{ if need_openssl then ( -}}
+	\
+	wget -O /tmp/{{ .openssl.ssl.name }} "{{ .openssl.ssl.url }}"; \
+	wget -O /tmp/{{ .openssl.dev.name }} "{{ .openssl.dev.url }}"; \
+	\
+	dpkg -i /tmp/{{ .openssl.ssl.name }}; \
+	dpkg -i /tmp/{{ .openssl.dev.name }}; \
+	\
+	echo "{{ .openssl.ssl.sha256 }} /tmp/{{ .openssl.ssl.name }}" | sha256sum --check --strict; \
+	echo "{{ .openssl.dev.sha256 }} /tmp/{{ .openssl.dev.name }}" | sha256sum --check --strict; \
+	\
+	rm /tmp/{{ .openssl.ssl.name }}; \
+	rm /tmp/{{ .openssl.dev.name }}; \
+{{ ) else "" end  -}}
 {{ if .rust.version then ( -}}
 	\
 	rustArch=; \
@@ -267,6 +284,9 @@ RUN set -eux; \
 		| sort -u \
 		| xargs -r apt-mark manual \
 	; \
+{{ if need_openssl then ( -}}
+	apt-mark manual {{ .openssl.ssl.lib }}; \
+{{ ) else "" end  -}}
 	apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false; \
 {{ ) end -}}
 	\
