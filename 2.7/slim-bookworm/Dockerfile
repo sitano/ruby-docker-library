@@ -100,6 +100,22 @@ RUN set -eux; \
 	make -j "$(nproc)"; \
 	make install; \
 	\
+# fix CVE-2020-36327 and CVE-2021-43809 of 2.1.4
+	rm /usr/local/lib/ruby/gems/2.7.0/specifications/default/bundler-2.1.4.gemspec; \
+	rm -rf /usr/local/lib/ruby/gems/2.7.0/gems/bundler-2.1.4; \
+	gem install bundler -v 2.2.33 --default; \
+	gem install bundler -v 2.2.33; \
+# fix CVE-2021-31799 of 6.2.1.1
+	rm /usr/local/lib/ruby/gems/2.7.0/specifications/default/rdoc-6.2.1.1.gemspec; \
+	rm -rf /usr/local/lib/ruby/gems/2.7.0/gems/rdoc-6.2.1.1; \
+	gem install rdoc -v 6.3.1 --default; \
+	gem install rdoc -v 6.3.1; \
+# fix CVE-2021-28965 of 3.2.3.1
+	rm /usr/local/lib/ruby/gems/2.7.0/specifications/default/rexml-3.2.3.1.gemspec; \
+	rm -rf /usr/local/lib/ruby/gems/2.7.0/gems/rexml-3.2.3.1; \
+	gem install rexml -v 3.2.5 --default; \
+	gem install rexml -v 3.2.5; \
+	\
 	apt-mark auto '.*' > /dev/null; \
 	apt-mark manual $savedAptMark > /dev/null; \
 	find /usr/local -type f -executable -not \( -name '*tkinter*' \) -exec ldd '{}' ';' \

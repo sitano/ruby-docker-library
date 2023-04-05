@@ -24,7 +24,8 @@
         "url"   : "http://ftp.debian.org/debian/pool/main/o/openssl/libssl-dev_1.1.1n-0+deb11u4_amd64.deb",
         "sha256": "58b94df14743d35ac280d35cdc29d90548e55ab6e9b7399d070ab7f2e4f6f11f"
       }
-    }
+    },
+    "fix_bookworm_27_cves" : "true"
   },
   "3.0": {
     "sha256": "b5cbee93e62d85cfb2a408c49fa30a74231ae8409c2b3858e5f5ea254d7ddbd1",
